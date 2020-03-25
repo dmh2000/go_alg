@@ -13,6 +13,13 @@ type Wqu struct {
 	count int
 }
 
+// NewWeightedQuickUnion : create and init a quick-union object
+func NewWeightedQuickUnion(n int) Wqu {
+	wqu := Wqu{}
+	wqu.Uf(n)
+	return wqu
+}
+
 // Uf : initialize with a slice of pairs
 func (wqu *Wqu) Uf(n int) {
 	// store the current count

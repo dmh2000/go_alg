@@ -14,6 +14,13 @@ type Qu struct {
 	count int
 }
 
+// NewQuickUnion : create and init a quick-union object
+func NewQuickUnion(n int) Qu {
+	qu := Qu{}
+	qu.Uf(n)
+	return qu
+}
+
 // Uf : initialize with a slice of pairs
 func (qu *Qu) Uf(n int) {
 	// store the current count

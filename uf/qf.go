@@ -2,7 +2,7 @@ package uf
 
 /*
 implementation of Quick-Find algorithm.
-Analysis of quick-find is presented in 
+Analysis of quick-find is presented in
 Sedgewick, Robert. Algorithms . Pearson Education. Kindle Edition. Chapter one
 
 */
@@ -11,6 +11,13 @@ Sedgewick, Robert. Algorithms . Pearson Education. Kindle Edition. Chapter one
 type Qf struct {
 	id    []int // list of components
 	count int
+}
+
+// NewQuickFind : create and init a Union-Find object
+func NewQuickFind(n int) Qf {
+	qf := Qf{}
+	qf.Uf(n)
+	return qf
 }
 
 // Uf : initialize with a slice of pairs
