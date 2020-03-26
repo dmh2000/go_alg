@@ -14,10 +14,10 @@ type Wqu struct {
 }
 
 // NewWeightedQuickUnion : create and init a quick-union object
-func NewWeightedQuickUnion(n int) Wqu {
+func NewWeightedQuickUnion(n int) *Wqu {
 	wqu := Wqu{}
 	wqu.Uf(n)
-	return wqu
+	return &wqu
 }
 
 // Uf : initialize with a slice of pairs

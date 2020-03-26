@@ -14,10 +14,10 @@ type Qf struct {
 }
 
 // NewQuickFind : create and init a Union-Find object
-func NewQuickFind(n int) Qf {
+func NewQuickFind(n int) *Qf {
 	qf := Qf{}
 	qf.Uf(n)
-	return qf
+	return &qf
 }
 
 // Uf : initialize with a slice of pairs

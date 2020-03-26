@@ -1,5 +1,10 @@
 package uf
 
+/*
+	Go code in this file is based on the Java implementation from
+	Sedgewick, Robert. Algorithms . Pearson Education. Kindle Edition. Chapter 4
+*/
+
 import (
 	"flag"
 	"os"
@@ -86,7 +91,7 @@ func TestQf(t *testing.T) {
 	qf := NewQuickFind(len(testData))
 
 	// execute the test code, passing the
-	b, p, q := testUf(&qf, testData)
+	b, p, q := testUf(qf, testData)
 	if !b {
 		t.Errorf("Quick Find : should be connected but weren't p:%d q:%d", p, q)
 	}
@@ -98,7 +103,7 @@ func BenchmarkQf(b *testing.B) {
 		qf := NewQuickFind(len(testData))
 
 		// assign to interface vairable so its polymorphic
-		testUf(&qf, testData)
+		testUf(qf, testData)
 	}
 }
 
@@ -112,7 +117,7 @@ func TestQu(t *testing.T) {
 	qu := NewQuickUnion(len(testData))
 
 	// execute the test code
-	b, p, q := testUf(&qu, testData)
+	b, p, q := testUf(qu, testData)
 	if !b {
 		t.Errorf("Quick Union : should be connected but weren't p:%d q:%d", p, q)
 	}
@@ -125,7 +130,7 @@ func BenchmarkQu(b *testing.B) {
 		qu := NewQuickUnion(len(testData))
 
 		// execute the test code
-		testUf(&qu, testData)
+		testUf(qu, testData)
 	}
 }
 
@@ -138,7 +143,7 @@ func TestWqu(t *testing.T) {
 	wqu := NewWeightedQuickUnion(len(testData))
 
 	// execute the test code
-	b, p, q := testUf(&wqu, testData)
+	b, p, q := testUf(wqu, testData)
 	if !b {
 		t.Errorf("Quick Find : should be connected but weren't p:%d q:%d", p, q)
 	}
@@ -152,7 +157,7 @@ func BenchmarkWqu(b *testing.B) {
 		wqu := NewWeightedQuickUnion(len(testData))
 
 		// execute the test code
-		testUf(&wqu, testData)
+		testUf(wqu, testData)
 	}
 }
 
@@ -166,7 +171,7 @@ func TestQfWqu(t *testing.T) {
 	wqu := NewWeightedQuickUnion(len(testData))
 
 	// execute the test code
-	b, p, q, b1, b2 := testUf2(&qf, &wqu, testData)
+	b, p, q, b1, b2 := testUf2(qf, wqu, testData)
 	if !b {
 		// there is a mismatch
 		t.Errorf("QF vs WGU : result mismatch p:%d q:%d b1:%v b2:%v", p, q, b1, b2)

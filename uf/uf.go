@@ -1,5 +1,10 @@
 package uf
 
+/*
+	Go code in this file is based on the Java implementation from
+	Sedgewick, Robert. Algorithms . Pearson Education. Kindle Edition. Chapter 4
+*/
+
 // Pair : input data
 type Pair struct {
 	P int

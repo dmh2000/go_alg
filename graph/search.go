@@ -1,5 +1,10 @@
 package graph
 
+/*
+	Go code in this file is based on the Java implementation from
+	Sedgewick, Robert. Algorithms . Pearson Education. Kindle Edition. Chapter 4
+*/
+
 import (
 	"container/list"
 )
@@ -145,37 +150,3 @@ func (bfs *BFS) PathTo(v int) []int {
 
 	return path
 }
-
-// private void bfs(Graph G, int s)
-//    {
-//       Queue<Integer> queue = new Queue<Integer>();
-//       marked[s] = true;          // Mark the source
-//       queue.enqueue(s);          //   and put it on the queue.
-//       while (!queue.isEmpty())
-//       {
-//          int v = queue.dequeue(); // Remove next vertex from the queue.
-//          for (int w : G.adj(v))
-// if (!marked[w])       // For every unmarked adjacent vertex,
-//             {
-//                edgeTo[w] = v;     //   save last edge on a shortest path,
-//                marked[w] = true;  //   mark it because path is known,
-//                queue.enqueue(w);  //   and add it to the queue.
-//             }
-//       }
-//    }
-//  public boolean hasPathTo(int v)
-//    {  return marked[v];  }
-//     public Iterable<Integer> pathTo(int v)
-//    //
-// public Iterable<Integer> pathTo(int v)
-//    {
-//       if (!hasPathTo(v)) return null;
-//       Stack<Integer> path = new Stack<Integer>();
-//       for (int x = v; x != s; x = edgeTo[x])
-//          path.push(x);
-//       path.push(s);
-//       return
-
-// Sedgewick, Robert. Algorithms . Pearson Education. Kindle Edition.
-
-// Sedgewick, Robert. Algorithms . Pearson Education. Kindle Edition.

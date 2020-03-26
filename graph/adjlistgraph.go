@@ -19,10 +19,10 @@ type AdjacencyListGraph struct {
 }
 
 // NewAdjacencyListGraph : create and initialize
-func NewAdjacencyListGraph(v int) AdjacencyListGraph {
+func NewAdjacencyListGraph(v int) *AdjacencyListGraph {
 	ag := AdjacencyListGraph{}
 	ag.Graph(v)
-	return ag
+	return &ag
 }
 
 // Graph : create a graph with no edges

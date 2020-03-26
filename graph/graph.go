@@ -1,5 +1,10 @@
 package graph
 
+/*
+	Go code in this file is based on the Java implementation from
+	Sedgewick, Robert. Algorithms . Pearson Education. Kindle Edition. Chapter 4
+*/
+
 // Graph :  interface to undirected graph
 // this implemntation assumes the number of vertices are known at init time.
 // edges can be added dynamically

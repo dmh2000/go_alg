@@ -15,10 +15,10 @@ type Qu struct {
 }
 
 // NewQuickUnion : create and init a quick-union object
-func NewQuickUnion(n int) Qu {
+func NewQuickUnion(n int) *Qu {
 	qu := Qu{}
 	qu.Uf(n)
-	return qu
+	return &qu
 }
 
 // Uf : initialize with a slice of pairs

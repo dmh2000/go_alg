@@ -1,5 +1,10 @@
 package graph
 
+/*
+	Go code in this file is based on the Java implementation from
+	Sedgewick, Robert. Algorithms . Pearson Education. Kindle Edition. Chapter 4
+*/
+
 import (
 	"flag"
 	"os"
@@ -12,12 +17,13 @@ const mediumG string = "../data/mediumG.txt"
 var testData graphData
 
 func TestDfsTiny(t *testing.T) {
+	var g Graph
 	f := tinyG
 	// get the test data
 	testData = getTestData(f)
 
 	// create an empty graph
-	g := NewAdjacencyListGraph(testData.v)
+	g = NewAdjacencyListGraph(testData.v)
 	// load the data
 	for i := range testData.edges {
 		v := testData.edges[i].v
@@ -26,7 +32,7 @@ func TestDfsTiny(t *testing.T) {
 	}
 	// perform the DFS
 	source := 0
-	d := NewDFS(&g, source)
+	d := NewDFS(g, source)
 	// check what should be marked
 	for i := 0; i < 7; i++ {
 		if !d.HasPathTo(i) {
@@ -81,7 +87,7 @@ func TestDfsMedium(t *testing.T) {
 	}
 	// perform the DFS
 	source := 0
-	d := NewDFS(&g, source)
+	d := NewDFS(g, source)
 
 	// the medium dataset is fully connected so there
 	// should be paths to all vertices
@@ -94,6 +100,7 @@ func TestDfsMedium(t *testing.T) {
 
 func TestBfsTiny(t *testing.T) {
 	f := tinyG
+
 	// get the test data
 	testData = getTestData(f)
 
@@ -107,7 +114,7 @@ func TestBfsTiny(t *testing.T) {
 	}
 	// perform the DFS
 	source := 0
-	bfs := NewBFS(&g, source)
+	bfs := NewBFS(g, source)
 	// check what should be marked
 	for i := 0; i < 7; i++ {
 		if !bfs.HasPathTo(i) {
