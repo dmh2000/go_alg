@@ -6,7 +6,9 @@ package graph
 */
 
 import (
+	"flag"
 	"fmt"
+	"os"
 	"testing"
 )
 
@@ -62,4 +64,14 @@ func TestDofS(t *testing.T) {
 		"/",
 	)
 
+}
+
+func TestMain(m *testing.M) {
+	// activate benchmarking if required
+	testing.Init()
+
+	// parse command line flags for test
+	flag.Parse()
+
+	os.Exit(m.Run())
 }

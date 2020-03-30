@@ -54,18 +54,18 @@ func (qf *Qf) Union(p int, q int) {
 }
 
 // Find : component index for p (0..N-1)
-func (qf *Qf) Find(p int) int {
+func (qf Qf) Find(p int) int {
 	// p is in component id[p]
 	return qf.id[p]
 }
 
 // Connected : return true if p and q are connected
-func (qf *Qf) Connected(p int, q int) bool {
+func (qf Qf) Connected(p int, q int) bool {
 	// connected only if both p and q are in the same component
 	return qf.Find(p) == qf.Find(q)
 }
 
 // Count : number of components
-func (qf *Qf) Count() int {
+func (qf Qf) Count() int {
 	return qf.count
 }

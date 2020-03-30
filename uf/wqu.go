@@ -69,7 +69,7 @@ func (wqu *Wqu) Union(p int, q int) {
 }
 
 // Find : component index for p (0..N-1)
-func (wqu *Wqu) Find(p int) int {
+func (wqu Wqu) Find(p int) int {
 	// p is in component id[p]
 	// follow the tree branch to find p
 	for p != wqu.id[p] {
@@ -79,12 +79,12 @@ func (wqu *Wqu) Find(p int) int {
 }
 
 // Connected : return true if p and q are connected
-func (wqu *Wqu) Connected(p int, q int) bool {
+func (wqu Wqu) Connected(p int, q int) bool {
 	// connected only if both p and q are in the same component
 	return wqu.Find(p) == wqu.Find(q)
 }
 
 // Count : number of components
-func (wqu *Wqu) Count() int {
+func (wqu Wqu) Count() int {
 	return wqu.count
 }
