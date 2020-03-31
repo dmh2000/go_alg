@@ -6,8 +6,6 @@ package uf
 */
 
 import (
-	"flag"
-	"os"
 	"testing"
 )
 
@@ -86,6 +84,8 @@ func testUf2(uf1 UF, uf2 UF, data []Pair) (bool, int, int, bool, bool) {
 // ------------------------------
 
 func TestQf(t *testing.T) {
+	// get the test data
+	testData = GetTestData(testDataFile)
 
 	// create a quick-find object
 	qf := NewQuickFind(len(testData))
@@ -98,6 +98,9 @@ func TestQf(t *testing.T) {
 }
 
 func BenchmarkQf(b *testing.B) {
+	// get the test data
+	testData = GetTestData(testDataFile)
+
 	for i := 0; i < 1000; i++ {
 		// create a quick-find object
 		qf := NewQuickFind(len(testData))
@@ -112,6 +115,8 @@ func BenchmarkQf(b *testing.B) {
 // -------------------------------
 
 func TestQu(t *testing.T) {
+	// get the test data
+	testData = GetTestData(testDataFile)
 
 	// create a quick-union object
 	qu := NewQuickUnion(len(testData))
@@ -124,6 +129,9 @@ func TestQu(t *testing.T) {
 }
 
 func BenchmarkQu(b *testing.B) {
+	// get the test data
+	testData = GetTestData(testDataFile)
+
 	for i := 0; i < 1000; i++ {
 
 		// create a quick-union object
@@ -139,6 +147,9 @@ func BenchmarkQu(b *testing.B) {
 // -----------------------------------------
 
 func TestWqu(t *testing.T) {
+	// get the test data
+	testData = GetTestData(testDataFile)
+
 	// create a weighted-quick-union object
 	wqu := NewWeightedQuickUnion(len(testData))
 
@@ -151,6 +162,9 @@ func TestWqu(t *testing.T) {
 }
 
 func BenchmarkWqu(b *testing.B) {
+	// get the test data
+	testData = GetTestData(testDataFile)
+
 	for i := 0; i < 1000; i++ {
 
 		// create a weighted-quick-union object
@@ -164,6 +178,9 @@ func BenchmarkWqu(b *testing.B) {
 // TestQfWqu : check that quick-find and weighted-quick-union
 // results match for all combinations of data
 func TestQfWqu(t *testing.T) {
+	// get the test data
+	testData := GetTestData(testDataFile)
+
 	// create a  quick-find object
 	qf := NewQuickFind(len(testData))
 
@@ -176,17 +193,4 @@ func TestQfWqu(t *testing.T) {
 		// there is a mismatch
 		t.Errorf("QF vs WGU : result mismatch p:%d q:%d b1:%v b2:%v", p, q, b1, b2)
 	}
-}
-
-func TestMain(m *testing.M) {
-	// activate benchmarking if required
-	testing.Init()
-
-	// parse command line flags for test
-	flag.Parse()
-
-	// get the test data
-	testData = GetTestData(testDataFile)
-
-	os.Exit(m.Run())
 }

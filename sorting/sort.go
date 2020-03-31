@@ -1,6 +1,6 @@
 package algsort
 
-// Sort interface definition
+// AlgSort interface definition
 type AlgSort interface {
 	isSorted() bool
 
@@ -9,4 +9,10 @@ type AlgSort interface {
 	lt(a int, b int) bool
 
 	length() int
+
+	get(a int) int
+
+	set(index int, value int)
+
+	clone() AlgSort
 }

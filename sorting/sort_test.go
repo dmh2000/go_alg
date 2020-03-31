@@ -1,9 +1,7 @@
 package algsort
 
 import (
-	"flag"
 	"math/rand"
-	"os"
 	"testing"
 )
 
@@ -33,6 +31,19 @@ func (data dataSlice) length() int {
 	return len(data)
 }
 
+func (data dataSlice) get(index int) int {
+	return data[index]
+}
+
+func (data dataSlice) set(index int, value int) {
+	data[index] = value
+}
+
+func (data dataSlice) clone() AlgSort {
+	a := make([]int, data.length())
+	return dataSlice(a)
+}
+
 func (data dataSlice) isSorted() bool {
 	j := 0
 	for i := 1; i < len(data); i++ {
@@ -44,54 +55,96 @@ func (data dataSlice) isSorted() bool {
 	return true
 }
 
-func TestInsertionSort(t *testing.T) {
-	var d dataSlice
+const iterations = 4096
 
-	d = make([]int, 256)
+func Random(f func(AlgSort), t *testing.T) {
+	var data dataSlice
 
-	for i := range d {
-		d[i] = rand.Int()
-	}
+	for k := 1; k < iterations; k++ {
+		data = make([]int, k)
 
-	InsertionSort(d)
-
-	prev := 0
-	for i := 1; i < len(d); i++ {
-		if d[prev] > d[i] {
-			t.Errorf("%v:%v should be less than %v:%v", prev, d[prev], i, d[i])
+		for j := 0; j < data.length(); j++ {
+			data.set(j, rand.Int())
 		}
-		prev = i
+
+		f(data)
+
+		if !data.isSorted() {
+			t.Errorf("%v : data is not sorted", k)
+		}
 	}
 }
 
-func TestQuickSort(t *testing.T) {
-	var d dataSlice
+func Inverted(f func(AlgSort), t *testing.T) {
+	var data dataSlice
 
-	d = make([]int, 256)
+	for k := 1; k < iterations; k++ {
+		data = make([]int, k)
 
-	for i := range d {
-		d[i] = rand.Int()
-	}
-
-	QuickSort(d)
-
-	prev := 0
-	for i := 1; i < len(d); i++ {
-		if d[prev] > d[i] {
-			t.Errorf("%v:%v should be less than %v:%v", prev, d[prev], i, d[i])
-			return
+		j := data.length() - 1
+		for i := range data {
+			data[i] = j
+			j--
 		}
-		prev = i
+
+		f(data)
+
+		if !data.isSorted() {
+			t.Error("data is not sorted")
+		}
+
 	}
 }
 
-func TestMain(m *testing.M) {
-	// activate benchmarking if required
-	testing.Init()
+func Inorder(f func(AlgSort), t *testing.T) {
+	var data dataSlice
+	for k := 1; k < iterations; k++ {
+		data = make([]int, k)
 
-	// parse command line flags for test
-	flag.Parse()
+		for j := range data {
+			data[j] = j
+		}
 
-	// run and exit
-	os.Exit(m.Run())
+		f(data)
+
+		if !data.isSorted() {
+			t.Error("data is not sorted")
+		}
+	}
+}
+
+func TestMergeSortInorder(t *testing.T) {
+	Inorder(MergeSort, t)
+}
+
+func TestMergeSortInverted(t *testing.T) {
+	Inverted(MergeSort, t)
+}
+
+func TestMergeSortRandom(t *testing.T) {
+	Random(MergeSort, t)
+}
+
+func TestQuickSortInorder(t *testing.T) {
+	Inorder(QuickSort, t)
+}
+
+func TestQuickSortInverted(t *testing.T) {
+	Inverted(QuickSort, t)
+}
+
+func TestQuickSortRandom(t *testing.T) {
+	Random(QuickSort, t)
+}
+
+func TestInsertionSortInorder(t *testing.T) {
+	Inorder(InsertionSort, t)
+}
+
+func TestInsertionSortInverted(t *testing.T) {
+	Inverted(InsertionSort, t)
+}
+
+func TestInsertionSortRandom(t *testing.T) {
+	Random(InsertionSort, t)
 }

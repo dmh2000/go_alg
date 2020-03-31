@@ -32,7 +32,7 @@ func TestSymbolGraph1(t *testing.T) {
 	}
 }
 
-var test_name string
+var testName string
 
 func TestSymbolGraph2(t *testing.T) {
 	sg := NewSymbolGraph(movies, "/")
@@ -44,7 +44,7 @@ func TestSymbolGraph2(t *testing.T) {
 	// loop through all keys to make sure it doesn't crash
 	for _, s := range k {
 		for _, v := range g.Adj(sg.Index(s)) {
-			test_name = sg.Name(v)
+			testName = sg.Name(v)
 		}
 	}
 

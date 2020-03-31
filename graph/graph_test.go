@@ -6,8 +6,6 @@ package graph
 */
 
 import (
-	"flag"
-	"os"
 	"testing"
 )
 
@@ -152,14 +150,4 @@ func TestBfsTiny(t *testing.T) {
 	if len(path) != 2 {
 		t.Error("BFS path is wrong length")
 	}
-}
-
-func TestMain(m *testing.M) {
-	// activate benchmarking if required
-	testing.Init()
-
-	// parse command line flags for test
-	flag.Parse()
-
-	os.Exit(m.Run())
 }
