@@ -1,18 +1,19 @@
 package algsort
 
 // AlgSort interface definition
+// implements sort.Interface
 type AlgSort interface {
 	isSorted() bool
-
-	exch(a int, b int)
-
-	lt(a int, b int) bool
-
-	length() int
 
 	get(a int) int
 
 	set(index int, value int)
 
 	clone() AlgSort
+
+	Len() int
+
+	Swap(i,j int)
+
+	Less(i,j int) bool
 }

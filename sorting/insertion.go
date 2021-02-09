@@ -2,15 +2,15 @@ package algsort
 
 // InsertionSort ...
 func InsertionSort(data AlgSort) {
-	if data.length() == 0 {
+	if data.Len() == 0 {
 		return
 	}
 
-	n := data.length()
+	n := data.Len()
 
 	for i := 1; i < n; i++ {
-		for j := i; j > 0 && data.lt(j, j-1); j-- {
-			data.exch(j, j-1)
+		for j := i; j > 0 && data.Less(j, j-1); j-- {
+			data.Swap(j, j-1)
 		}
 	}
 }
@@ -22,8 +22,8 @@ func insertionSort(data AlgSort, lo int, hi int) {
 	}
 
 	for i := lo; i <= hi; i++ {
-		for j := i; j > 0 && data.lt(j, j-1); j-- {
-			data.exch(j, j-1)
+		for j := i; j > 0 && data.Less(j, j-1); j-- {
+			data.Swap(j, j-1)
 		}
 	}
 }

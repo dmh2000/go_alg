@@ -20,11 +20,11 @@ func printQ(data AlgSort, lo int, hi int) {
 
 // shuffle : fisher-yates shuffle
 func shuffle(data AlgSort) {
-	n := data.length()
+	n := data.Len()
 	for i := 0; i < n-1; i++ {
 		j := rand.Int() % (n - i)
 		j += i
-		data.exch(i, j)
+		data.Swap(i, j)
 	}
 }
 
@@ -34,7 +34,7 @@ func partition(data AlgSort, lo int, hi int) int {
 	for {
 		for {
 			i++
-			if !data.lt(i, lo) {
+			if !data.Less(i, lo) {
 				break
 			}
 			if i == hi {
@@ -43,7 +43,7 @@ func partition(data AlgSort, lo int, hi int) int {
 		}
 		for {
 			j--
-			if !data.lt(lo, j) {
+			if !data.Less(lo, j) {
 				break
 			}
 			if j == lo {
@@ -53,10 +53,10 @@ func partition(data AlgSort, lo int, hi int) int {
 		if i >= j {
 			break
 		}
-		data.exch(i, j)
+		data.Swap(i, j)
 
 	}
-	data.exch(lo, j)
+	data.Swap(lo, j)
 	printQ(data, lo, hi)
 	return j
 }
@@ -72,10 +72,12 @@ func qsort(data AlgSort, lo int, hi int) {
 
 // QuickSort ...
 func QuickSort(data AlgSort) {
-	if data.length() == 0 {
+	if data.Len() == 0 {
 		return
 	}
+
 	// shuffle to avoid n^2 for inorder sort
 	shuffle(data)
-	qsort(data, 0, data.length()-1)
+	// quicksort
+	qsort(data, 0, data.Len()-1)
 }

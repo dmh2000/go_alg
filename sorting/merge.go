@@ -44,7 +44,7 @@ outer:
 			break outer
 		}
 
-		if data.lt(i, j) {
+		if data.Less(i, j) {
 			aux.set(k, data.get(i))
 			i++
 			k++
@@ -74,10 +74,10 @@ func msort(data AlgSort, aux AlgSort, lo int, hi int) {
 
 // MergeSort ...
 func MergeSort(data AlgSort) {
-	if data.length() == 0 {
+	if data.Len() == 0 {
 		return
 	}
 	aux := data.clone()
 
-	msort(data, aux, 0, data.length()-1)
+	msort(data, aux, 0, data.Len()-1)
 }

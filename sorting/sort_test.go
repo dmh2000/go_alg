@@ -2,10 +2,12 @@ package algsort
 
 import (
 	"math/rand"
+	"os"
 	"testing"
 )
 
 type dataSlice []int
+
 
 func (data dataSlice) Less(a int, b int) bool {
 	return data[a] < data[b]
@@ -19,18 +21,6 @@ func (data dataSlice) Len() int {
 	return len(data)
 }
 
-func (data dataSlice) lt(a, b int) bool {
-	return data[a] < data[b]
-}
-
-func (data dataSlice) exch(a, b int) {
-	data[a], data[b] = data[b], data[a]
-}
-
-func (data dataSlice) length() int {
-	return len(data)
-}
-
 func (data dataSlice) get(index int) int {
 	return data[index]
 }
@@ -40,8 +30,7 @@ func (data dataSlice) set(index int, value int) {
 }
 
 func (data dataSlice) clone() AlgSort {
-	a := make([]int, data.length())
-	return dataSlice(a)
+	return make(dataSlice,len(data))
 }
 
 func (data dataSlice) isSorted() bool {
@@ -55,96 +44,122 @@ func (data dataSlice) isSorted() bool {
 	return true
 }
 
-const iterations = 4096
+func doSort(f func(AlgSort),data dataSlice, t *testing.T) {
+	f(data)
 
-func Random(f func(AlgSort), t *testing.T) {
-	var data dataSlice
-
-	for k := 1; k < iterations; k++ {
-		data = make([]int, k)
-
-		for j := 0; j < data.length(); j++ {
-			data.set(j, rand.Int())
-		}
-
-		f(data)
-
-		if !data.isSorted() {
-			t.Errorf("%v : data is not sorted", k)
-		}
+	if !data.isSorted() {
+		t.Errorf("data is not sorted")
 	}
 }
 
-func Inverted(f func(AlgSort), t *testing.T) {
-	var data dataSlice
+func randomData(k int) dataSlice {
+	data := make(dataSlice, k)
 
-	for k := 1; k < iterations; k++ {
-		data = make([]int, k)
+	for j := 0; j < data.Len(); j++ {
+		data.set(j, rand.Int())
+	}
 
-		j := data.length() - 1
-		for i := range data {
-			data[i] = j
-			j--
-		}
+	return data
+}
 
-		f(data)
+func descendingData(k int) dataSlice {
+	data := make(dataSlice, k)
 
-		if !data.isSorted() {
-			t.Error("data is not sorted")
-		}
+	j := data.Len() - 1
+	for i := range data {
+		data[i] = j
+		j--
+	}
 
+	return data
+}
+
+func ascendingData(k int) dataSlice {
+	data := make(dataSlice, k)
+
+	for j := range data {
+		data[j] = j
+	}
+	return data
+}
+
+var iterations = 1
+var dataLength = 1024 * 1024
+
+func TestMergeSortAscending(t *testing.T) {
+	for i:=0;i<iterations;i++ {
+		doSort(MergeSort, ascendingData(dataLength), t)
 	}
 }
 
-func Inorder(f func(AlgSort), t *testing.T) {
-	var data dataSlice
-	for k := 1; k < iterations; k++ {
-		data = make([]int, k)
-
-		for j := range data {
-			data[j] = j
-		}
-
-		f(data)
-
-		if !data.isSorted() {
-			t.Error("data is not sorted")
-		}
+func TestMergeSortDescending(t *testing.T) {
+	for i:=0;i<iterations;i++ {
+		doSort(MergeSort, descendingData(dataLength), t)
 	}
-}
-
-func TestMergeSortInorder(t *testing.T) {
-	Inorder(MergeSort, t)
-}
-
-func TestMergeSortInverted(t *testing.T) {
-	Inverted(MergeSort, t)
 }
 
 func TestMergeSortRandom(t *testing.T) {
-	Random(MergeSort, t)
+	for i:=0;i<iterations;i++ {
+		doSort(MergeSort,randomData(dataLength), t)
+	}
 }
 
-func TestQuickSortInorder(t *testing.T) {
-	Inorder(QuickSort, t)
+func TestQuickSortAscending(t *testing.T) {
+	for i:=0;i<iterations;i++ {
+		doSort(QuickSort, ascendingData(dataLength), t)
+	}
 }
 
-func TestQuickSortInverted(t *testing.T) {
-	Inverted(QuickSort, t)
+func TestQuickSortDescending(t *testing.T) {
+	for i:=0;i<iterations;i++ {
+		doSort(QuickSort,descendingData(dataLength), t)
+	}
 }
 
 func TestQuickSortRandom(t *testing.T) {
-	Random(QuickSort, t)
+	for i:=0;i<iterations;i++ {
+		doSort(QuickSort, randomData(dataLength), t)
+	}
 }
 
-func TestInsertionSortInorder(t *testing.T) {
-	Inorder(InsertionSort, t)
+func TestGoSortAscending(t *testing.T) {
+	for i:=0;i<iterations;i++ {
+		doSort(GoSort, ascendingData(dataLength), t)
+	}
 }
 
-func TestInsertionSortInverted(t *testing.T) {
-	Inverted(InsertionSort, t)
+func TestGoSortDescending(t *testing.T) {
+	for i:=0;i<iterations;i++ {
+		doSort(GoSort, descendingData(dataLength), t)
+	}
+}
+
+func TestGoSortRandom(t *testing.T) {
+	for i:=0;i<iterations;i++ {
+		doSort(GoSort, randomData(dataLength), t)
+	}
+}
+
+func TestInsertionSortAscending(t *testing.T) {
+	for i:=0;i<iterations;i++ {
+		doSort(InsertionSort, ascendingData(dataLength), t)
+	}
+}
+
+func TestInsertionSortDescending(t *testing.T) {
+	for i:=0;i<iterations;i++ {
+		doSort(InsertionSort, descendingData(dataLength), t)
+	}
 }
 
 func TestInsertionSortRandom(t *testing.T) {
-	Random(InsertionSort, t)
+	for i:=0;i<iterations;i++ {
+		doSort(InsertionSort, randomData(dataLength), t)
+	}
+}
+
+func TestMain(m *testing.M) {
+	// dataLength = 1024 * 1024
+	// iterations = 5
+	os.Exit(m.Run())
 }
