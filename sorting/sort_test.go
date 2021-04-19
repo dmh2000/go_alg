@@ -84,7 +84,7 @@ func ascendingData(k int) dataSlice {
 }
 
 var iterations = 1
-var dataLength = 1024 * 1024
+var dataLength = 1024 * 32
 
 func TestMergeSortAscending(t *testing.T) {
 	for i:=0;i<iterations;i++ {
