@@ -1,8 +1,8 @@
-# A Few Algorithms in Go
+## Some Algorithms in Go
 
-![example workflow](https://github.com/github/docs/actions/workflows/go.yml/badge.svg)
+![test](https://github.com/github/go_alg/actions/workflows/go.yml/badge.svg)
 
-The Go code in this repo are transcriptions of
+The Go code in this repo are transcriptions of parts of
 the code in the book [Algorithms by Robert Sedgewick](https://algs4.cs.princeton.edu/home/)
 
 - includes
