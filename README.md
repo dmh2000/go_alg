@@ -5,6 +5,8 @@
 The Go code in this repo are transcriptions of parts of
 the code in the book [Algorithms by Robert Sedgewick](https://algs4.cs.princeton.edu/home/)
 
+[original Java code](https://algs4.cs.princeton.edu/code/)
+
 - includes
   -  sorting
   -  graph
