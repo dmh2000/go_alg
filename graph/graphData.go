@@ -75,13 +75,13 @@ func getTestData(fname string) graphData {
 	// get number of vertices
 	vertices = scanInt(fs)
 	if vertices <= 0 {
-		panic("invalid vertices value : " + string(vertices))
+		panic("invalid vertices value : " + fmt.Sprintf("%v", vertices))
 	}
 
 	// get number of edges
 	edges = scanInt(fs)
 	if edges <= 0 {
-		panic("invalid edges value : " + string(edges))
+		panic("invalid edges value : " + fmt.Sprintf("%v", edges))
 	}
 
 	// create a graph data object

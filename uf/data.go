@@ -63,7 +63,7 @@ func GetTestData(fname string) []Pair {
 	// get the count of elements
 	count = scanInt(fs)
 	if count <= 0 {
-		panic("invalid count value : " + string(count))
+		panic("invalid count value : " + fmt.Sprintf("%v", count))
 	}
 
 	data := make([]Pair, count)
