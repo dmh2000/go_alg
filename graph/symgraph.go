@@ -1,9 +1,5 @@
 package graph
 
-/*
-	Go code in this file is based on the Java implementation from
-	Sedgewick, Robert. Algorithms . Pearson Education. Kindle Edition. Chapter 4
-*/
 
 import (
 	"bufio"
@@ -125,7 +121,7 @@ func DegreesOfSeparation(source string, sink string, fname string, sep string) {
 	g := sg.G()
 
 	if !sg.Contains(source) {
-		fmt.Printf("%s no in database\n", source)
+		fmt.Printf("%s not in database\n", source)
 		return
 	}
 
